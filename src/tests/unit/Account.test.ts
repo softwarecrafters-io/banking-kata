@@ -2,9 +2,10 @@ import { Account } from '../../core/Account';
 import { TransactionRepository } from '../../core/TransactionRepository';
 import { Transaction } from '../../core/Transaction';
 import { StatementPrinter } from '../../core/StatementPrinter';
+import { Clock } from '../../core/Clock';
 
 describe('The account', () => {
-	const repository = new TransactionRepository();
+	const repository = new TransactionRepository(new Clock());
 	const statementPrinter = new StatementPrinter();
 	const account = new Account(repository, statementPrinter);
 	const addDepositSpy = jest.spyOn(repository, 'addDeposit');
@@ -24,7 +25,7 @@ describe('The account', () => {
 	});
 
 	it('prints a statement throughout the statement printer', () => {
-		const transactions = [new Transaction(), new Transaction()];
+		const transactions = [new Transaction('25/03/2022', 100), new Transaction('25/03/2022', 100)];
 		repository.allTransactions = () => transactions;
 
 		account.printStatement();
