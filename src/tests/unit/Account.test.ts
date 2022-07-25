@@ -1,11 +1,7 @@
 import { Account } from '../../core/Account';
 import { TransactionRepository } from '../../core/TransactionRepository';
-
-export class Transaction {}
-
-export class StatementPrinter {
-	print(transactions: Transaction[]) {}
-}
+import { Transaction } from '../../core/Transaction';
+import { StatementPrinter } from '../../core/StatementPrinter';
 
 describe('The account', () => {
 	const repository = new TransactionRepository();
