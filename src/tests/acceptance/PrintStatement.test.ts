@@ -1,10 +1,12 @@
 import { Account } from '../../core/Account';
 import { Console } from '../../core/Console';
+import { TransactionRepository } from '../../core/TransactionRepository';
 
 describe('Print Statement', () => {
 	const console = new Console();
 	const consoleSpy = jest.spyOn(console, 'log');
-	const account = new Account();
+	const repository = new TransactionRepository();
+	const account = new Account(repository);
 
 	it('prints an account statement including the transactions made throughout the console', () => {
 		account.deposit(1000);

@@ -7,7 +7,9 @@ export class Account {
 		this.repository.addDeposit(number);
 	}
 
-	withdraw(number: number) {}
+	withdraw(number: number) {
+		this.repository.addWithdrawal(number);
+	}
 
 	printStatement() {}
 }
