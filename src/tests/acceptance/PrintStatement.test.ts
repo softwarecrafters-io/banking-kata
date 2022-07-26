@@ -7,7 +7,13 @@ import { Clock } from '../../core/Clock';
 describe('Print Statement', () => {
 	const console = new Console();
 	const consoleSpy = jest.spyOn(console, 'log');
-	const repository = new TransactionRepository(new Clock());
+	const clock = new Clock();
+	clock.todayAsString = jest
+		.fn()
+		.mockReturnValueOnce('10/01/2022')
+		.mockReturnValueOnce('13/01/2022')
+		.mockReturnValueOnce('14/01/2022');
+	const repository = new TransactionRepository(clock);
 	const statementPrinter = new StatementPrinter(console);
 	const account = new Account(repository, statementPrinter);
 
