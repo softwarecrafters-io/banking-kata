@@ -8,14 +8,21 @@ export class StatementPrinter {
 
 	print(transactions: Transaction[]) {
 		this.console.log(this.header);
-		let runningBalance = 0;
-		transactions
-			.map((transaction) => {
-				runningBalance += transaction.amount;
-				return this.formatStatementLine(transaction, runningBalance);
-			})
+		this.printStatements(transactions);
+	}
+
+	private printStatements(transactions: Transaction[]) {
+		this.generateStatementLine(transactions)
 			.reverse()
 			.forEach((line) => this.console.log(line));
+	}
+
+	private generateStatementLine(transactions: Transaction[]) {
+		let runningBalance = 0;
+		return transactions.map((transaction) => {
+			runningBalance += transaction.amount;
+			return this.formatStatementLine(transaction, runningBalance);
+		});
 	}
 
 	private formatStatementLine(transaction: Transaction, runningBalance: number) {
